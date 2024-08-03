@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "apigateway"
+version = "0.1.0"
+description = ""
+authors = ["Andrey <andreygrigorev0@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+djangorestframework-simplejwt = "*"
+djangorestframework-camel-case  = "*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
