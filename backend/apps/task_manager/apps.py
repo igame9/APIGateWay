@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class GatewayConfig(AppConfig):
-    name = 'task_manager'
+    name = 'apps.task_manager'
