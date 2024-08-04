@@ -1,14 +1,11 @@
 import requests
 from django.http import HttpResponse
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
-
-
-TASK_MANAGER_SERVICE_URL = 'http://localhost:8000/'  # !!!
+from rest_framework.status import HTTP_401_UNAUTHORIZED
+from settings.settings import TASK_MANAGER_SERVICE_URL
 
 
 class TaskManagerProxy(APIView):
-    permission_classes = [AllowAny]
 
     def dispatch(self, request, *args, **kwargs):
         method = request.method
@@ -17,6 +14,17 @@ class TaskManagerProxy(APIView):
         url = f'{TASK_MANAGER_SERVICE_URL}{path}'
 
         headers = {key: value for key, value in request.headers.items() if key.lower() != 'host'}
+
+        print(headers)
+
+        auth_header = headers.get("Authorization", None)
+
+        if not auth_header:
+            return HttpResponse(
+                "Authorization header not found",
+                status=HTTP_401_UNAUTHORIZED,
+                content_type='application/json'
+            )
 
         data = request.body
 
